@@ -23,11 +23,39 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        // every launch launches a new coroutine which is executed in multitasking with the others
         GlobalScope.launch {
-            repeat(100) {
-                delay(1000L)
-                println("Coroutine 1")
+            launch {
+                launch {
+                    delay(1000)
+                    println("Innermost Coroutine finished!")
+                }
+                delay(500)
+                println("Inner Coroutine finished!")
             }
+            println("Outermost Coroutine finished!")
+        }
+
+
+        // ...the result is equal doing this : 
+        GlobalScope.launch {
+            launch {
+                println("1 Outermost Coroutine finished!")
+            }
+        }
+
+        GlobalScope.launch {
+            launch {
+                delay(500)
+                println("1 Inner Coroutine finished!")
+            }
+        }
+
+        GlobalScope.launch {
+                launch {
+                    delay(1000)
+                    println("1 Innermost Coroutine finished!")
+                }
         }
 
 
