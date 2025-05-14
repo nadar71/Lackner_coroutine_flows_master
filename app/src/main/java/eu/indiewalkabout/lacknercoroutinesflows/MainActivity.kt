@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import eu.indiewalkabout.lacknercoroutinesflows.ui.theme.LacknerCoroutinesFlowsTheme
 import eu.indiewalkabout.lacknercoroutinesflows.useReduce
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -24,15 +25,12 @@ class MainActivity : ComponentActivity() {
 
         GlobalScope.launch {
             repeat(100) {
+                delay(1000L)
                 println("Coroutine 1")
             }
         }
 
-        GlobalScope.launch {
-            repeat(100) {
-                println("Coroutine 2")
-            }
-        }
+
 
         useMakePrinter("INFO","All systems go")
 
